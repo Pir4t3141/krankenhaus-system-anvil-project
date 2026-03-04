@@ -38,6 +38,7 @@ components:
   properties: {text: Krankenhausuebersicht}
   type: Label
 container:
+  event_bindings: {}
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate
 events: []
