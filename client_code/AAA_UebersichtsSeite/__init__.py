@@ -13,8 +13,9 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
     # Any code you write here will run before the form opens.
     try:
       self.drop_down_krankenhaus_fill()
-    except:
-      print("Failed to fill Dropdown")
+    finally:
+      pass
+    
 
   @handle("link_krankenhaus", "click")
   def link_krankenhaus_click(self, **event_args):
@@ -37,6 +38,8 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
     self.link_zimmer.role = ''
 
   def drop_down_krankenhaus_fill(self, **event_args):
+    if in_designer:
+      return
     return_value = anvil.server.call('get_krankenhaeuser')
     return_value = [entry[1] for entry in return_value]
     self.drop_down_krankenhaus.items = return_value
