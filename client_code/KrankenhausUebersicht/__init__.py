@@ -13,6 +13,7 @@ class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
 
     # Any code you write here will run before the form opens.
     
+    
 
   @handle("", "show")
   def form_show(self, **event_args):
