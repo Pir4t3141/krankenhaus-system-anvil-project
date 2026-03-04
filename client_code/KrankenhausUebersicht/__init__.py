@@ -12,6 +12,7 @@ class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+    self.layout.drop_down_krankenhaus_fill()
 
   @handle("", "show")
   def form_show(self, **event_args):

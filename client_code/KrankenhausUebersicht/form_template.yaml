@@ -4,6 +4,10 @@ components_by_slot:
     name: label_1
     properties: {text: Krankenhaus}
     type: Label
+  - layout_properties: {}
+    name: map_krankenhaus
+    properties: {height: 286.20001220703125}
+    type: GoogleMap
 is_package: true
 layout:
   form_event_bindings: {}

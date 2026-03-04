@@ -10,9 +10,11 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    
     # Any code you write here will run before the form opens.
-    print("asdf")
+    try:
+      self.drop_down_krankenhaus_fill()
+    except:
+      print("Failed to fill Dropdown")
 
   @handle("link_krankenhaus", "click")
   def link_krankenhaus_click(self, **event_args):
@@ -34,8 +36,15 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
     self.link_stationen.role = ''
     self.link_zimmer.role = ''
 
+  def drop_down_krankenhaus_fill(self, **event_args):
+    return_value = anvil.server.call('get_krankenhaeuser')
+    return_value = [entry[1] for entry in return_value]
+    self.drop_down_krankenhaus.items = return_value
+
+    self.drop_down_krankenhaus_change()
+
   @handle("drop_down_krankenhaus", "change")
   def drop_down_krankenhaus_change(self, **event_args):
     """This method is called when an item is selected"""
-    print("asdf")
-        
+    pass
+    

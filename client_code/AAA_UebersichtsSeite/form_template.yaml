@@ -1,9 +1,9 @@
 components:
 - components:
   - event_bindings: {}
-    layout_properties: {grid_position: 'WTRLVX,TAIFIF'}
+    layout_properties: {grid_position: 'PULVCR,OHXHID'}
     name: drop_down_krankenhaus
-    properties: {enabled: true}
+    properties: {}
     type: DropDown
   layout_properties: {slot: default}
   name: content_panel
@@ -40,8 +40,10 @@ components:
 container:
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate
+events: []
 is_package: true
 layout_metadata: {description: Standard Layout fuer Uebersicht, title: Uebersicht}
+properties: []
 slots:
   content_slot:
     index: 1
