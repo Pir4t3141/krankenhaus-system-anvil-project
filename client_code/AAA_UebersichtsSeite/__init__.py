@@ -10,7 +10,7 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-
+    
     # Any code you write here will run before the form opens.
     return_value = anvil.server.call('get_krankenhaeuser')
     return_value = [entry[1] for entry in return_value]
