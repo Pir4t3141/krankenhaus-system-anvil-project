@@ -3,7 +3,7 @@ components:
   - event_bindings: {}
     layout_properties: {grid_position: 'WTRLVX,TAIFIF'}
     name: drop_down_krankenhaus
-    properties: {}
+    properties: {enabled: true}
     type: DropDown
   layout_properties: {slot: default}
   name: content_panel

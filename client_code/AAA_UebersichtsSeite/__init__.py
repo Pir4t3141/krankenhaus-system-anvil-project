@@ -12,11 +12,7 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
     self.init_components(**properties)
     
     # Any code you write here will run before the form opens.
-    return_value = anvil.server.call('get_krankenhaeuser')
-    return_value = [entry[1] for entry in return_value]
-    self.drop_down_krankenhaus.items = return_value
-
-    self.drop_down_krankenhaus_change()
+    print("asdf")
 
   @handle("link_krankenhaus", "click")
   def link_krankenhaus_click(self, **event_args):
@@ -41,5 +37,5 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
   @handle("drop_down_krankenhaus", "change")
   def drop_down_krankenhaus_change(self, **event_args):
     """This method is called when an item is selected"""
-    pass
+    print("asdf")
         
