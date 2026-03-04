@@ -1,13 +1,22 @@
-from ._anvil_designer import UebersichtsSeiteTemplate
+from ._anvil_designer import AAA_UebersichtsSeiteTemplate
 from anvil import *
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
+import anvil.server
 
 
-class UebersichtsSeite(UebersichtsSeiteTemplate):
+class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+    return_value = anvil.server.call('get_krankenhaeuser')
+    return_value = [entry[1] for entry in return_value]
+    self.drop_down_krankenhaus.items = return_value
+
+    self.drop_down_krankenhaus_change()
 
   @handle("link_krankenhaus", "click")
   def link_krankenhaus_click(self, **event_args):
@@ -28,3 +37,9 @@ class UebersichtsSeite(UebersichtsSeiteTemplate):
     self.link_krankenhaus.role = ''
     self.link_stationen.role = ''
     self.link_zimmer.role = ''
+
+  @handle("drop_down_krankenhaus", "change")
+  def drop_down_krankenhaus_change(self, **event_args):
+    """This method is called when an item is selected"""
+    pass
+        

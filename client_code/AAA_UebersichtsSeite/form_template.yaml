@@ -1,5 +1,10 @@
 components:
-- components: []
+- components:
+  - event_bindings: {}
+    layout_properties: {grid_position: 'WTRLVX,TAIFIF'}
+    name: drop_down_krankenhaus
+    properties: {}
+    type: DropDown
   layout_properties: {slot: default}
   name: content_panel
   properties: {col_widths: '{}'}
@@ -39,6 +44,6 @@ is_package: true
 layout_metadata: {description: Standard Layout fuer Uebersicht, title: Uebersicht}
 slots:
   content_slot:
-    index: 0
+    index: 1
     set_layout_properties: {grid_position: 'NYJLPL,KMKEDN'}
     target: {name: content_panel, type: container}

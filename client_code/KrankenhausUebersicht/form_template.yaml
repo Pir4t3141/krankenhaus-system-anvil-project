@@ -7,4 +7,4 @@ components_by_slot:
 is_package: true
 layout:
   form_event_bindings: {}
-  type: form:UebersichtsSeite
+  type: form:AAA_UebersichtsSeite
