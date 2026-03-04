@@ -10,5 +10,6 @@ components_by_slot:
     type: GoogleMap
 is_package: true
 layout:
+  event_bindings: {}
   form_event_bindings: {}
   type: form:AAA_UebersichtsSeite

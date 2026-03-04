@@ -41,7 +41,8 @@ container:
   event_bindings: {}
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate
-events: []
+events:
+- {default_event: true, description: when the component is changed, name: drop_down_krankenhaus_has_changed}
 is_package: true
 layout_metadata: {description: Standard Layout fuer Uebersicht, title: Uebersicht}
 properties: []

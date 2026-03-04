@@ -43,7 +43,7 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
   @handle("drop_down_krankenhaus", "change")
   def drop_down_krankenhaus_change(self, **event_args):
     """This method is called when an item is selected"""
-    pass    
+    self.raise_event('drop_down_krankenhaus_has_changed')
 
   @handle("drop_down_krankenhaus", "show")
   def drop_down_krankenhaus_show(self, **event_args):

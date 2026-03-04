@@ -12,9 +12,13 @@ class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
-    self.layout.drop_down_krankenhaus_fill()
 
   @handle("", "show")
   def form_show(self, **event_args):
     self.layout.reset_links()
     self.layout.link_krankenhaus.role = 'selected'
+
+  @handle("", "drop_down_krankenhaus_has_changed")
+  def form_drop_down_krankenhaus_has_changed(self, **event_args):
+    """This method is called when the component is changed"""
+    print("tuff")
