@@ -12,7 +12,6 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
     self.init_components(**properties)
     # Any code you write here will run before the form opens.
     
-
   @handle("link_krankenhaus", "click")
   def link_krankenhaus_click(self, **event_args):
     """This method is called when the link is clicked"""
@@ -43,6 +42,7 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
   @handle("drop_down_krankenhaus", "change")
   def drop_down_krankenhaus_change(self, **event_args):
     """This method is called when an item is selected"""
+    print("not as tuff")
     self.raise_event('drop_down_krankenhaus_has_changed')
 
   @handle("drop_down_krankenhaus", "show")
