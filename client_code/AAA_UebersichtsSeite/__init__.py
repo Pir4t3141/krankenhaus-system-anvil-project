@@ -43,10 +43,9 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
   @handle("drop_down_krankenhaus", "change")
   def drop_down_krankenhaus_change(self, **event_args):
     """This method is called when an item is selected"""
-    pass
+    pass    
 
-  @handle("", "show")
-  def form_show(self, **event_args):
-    """This method is called when the form is shown on the page"""
+  @handle("drop_down_krankenhaus", "show")
+  def drop_down_krankenhaus_show(self, **event_args):
+    """This method is called when the DropDown is shown on the screen"""
     self.drop_down_krankenhaus_fill()
-    
