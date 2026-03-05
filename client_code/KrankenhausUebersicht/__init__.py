@@ -11,13 +11,12 @@ class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-    # Any code you write here will run before the form opens.
-    
+    # Any code you write here will run before the form opens.  
 
   @handle("", "show")
   def form_show(self, **event_args):
     self.layout.reset_links()
     self.layout.link_krankenhaus.role = 'selected'
-
-  def drop_down_krankenhaus_has_changed():
-    
+  
+  def drop_down_krankenhaus_has_changed(self, **event_args):
+    print("so fucking tuff")
