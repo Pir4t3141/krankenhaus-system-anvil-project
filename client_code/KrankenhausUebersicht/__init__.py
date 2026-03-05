@@ -22,17 +22,20 @@ class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
   def drop_down_krankenhaus_has_changed(self, **event_args):
     """This method is called when the drop down element has changed"""
     try:
-      print(self.layout.drop_down_krankenhaus.selected_value)
-      coordinates = anvil.server.call('get_coordinates', self.layout.drop_down_krankenhaus.selected_value)[0]
-      print(coordinates)
-  
-      marker = GoogleMap.Marker(
-        animation=GoogleMap.Animation.DROP,
-        position=GoogleMap.LatLng(coordinates[0], coordinates[1])
-      )
-  
-      self.map_krankenhaus.zoom = 20
-      self.map_krankenhaus.center = GoogleMap.LatLng(coordinates[0], coordinates[1])
-      self.map_krankenhaus.add_component(marker)
-    except:
+      if len(self.layout.drop_down_krankenhaus.items) > 0 and self.layout.link_krankenhaus.role == 'selected':
+        print(self.layout.drop_down_krankenhaus.selected_value)
+        return_value = anvil.server.call('get_coordinates', self.layout.drop_down_krankenhaus.selected_value)
+        coordinates = return_value[0]
+
+        self.map_krankenhaus.clear()
+            
+        marker = GoogleMap.Marker(
+          animation=GoogleMap.Animation.DROP,
+          position=GoogleMap.LatLng(coordinates[0], coordinates[1])
+        )
+    
+        self.map_krankenhaus.zoom = 20
+        self.map_krankenhaus.center = GoogleMap.LatLng(coordinates[0], coordinates[1])
+        self.map_krankenhaus.add_component(marker)
+    finally:
       pass

@@ -4,6 +4,18 @@ components_by_slot:
     name: label_1
     properties: {text: Stationen}
     type: Label
+  - components:
+    - name: repeating_panel_1
+      properties: {item_template: StationenUebersicht.RowTemplate1}
+      type: RepeatingPanel
+    layout_properties: {}
+    name: data_grid_stationen
+    properties:
+      columns:
+      - {data_key: column_1, id: JKSDUP, title: Stationenname}
+      - {data_key: column_2, id: VJQQOR, title: Zimmeranzahl}
+      - {data_key: column_3, id: OJLQEN, title: Column 3}
+    type: DataGrid
 is_package: true
 layout:
   form_event_bindings: {}

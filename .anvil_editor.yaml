@@ -6,6 +6,7 @@ unique_ids:
     AAA_UebersichtsSeite: R2W3Z4WFKL6DMEKYY34R5L3S2IOMUEQF
     KrankenhausUebersicht: '1772620986918511091550046.5528'
     StationenUebersicht: '1772620828586554807123732.3761'
+    StationenUebersicht.RowTemplate1: '1772715863029784759351722.9594'
     ZimmerUebersicht: '1772620999578512137406918.9439'
   modules: {}
   scripts: {}
