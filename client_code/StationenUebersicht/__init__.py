@@ -23,6 +23,6 @@ class StationenUebersicht(StationenUebersichtTemplate):
     """This method is called when the drop down element has changed"""
     try:
       if len(self.layout.drop_down_krankenhaus.items) > 0 and self.layout.link_krankenhaus.role == 'selected':
-        
+        pass
     finally:
       pass
