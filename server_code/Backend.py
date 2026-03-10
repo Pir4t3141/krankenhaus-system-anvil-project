@@ -17,7 +17,7 @@ def get_krankenhaeuser():
 def get_coordinates(krankenhaus_name: str):
   with sqlite3.connect(data_files["krankenhaus.db"]) as conn:
     cur = conn.cursor()
-    result = cur.execute(f"SELECT latitude, longitude FROM krankenhaus WHERE krankenhaus_id = '{krankenhaus_name}'").fetchall()
+    result = cur.execute(f"SELECT latitude, longitude FROM krankenhaus WHERE name = '{krankenhaus_name}'").fetchall()
   return result
 
 @anvil.server.callable

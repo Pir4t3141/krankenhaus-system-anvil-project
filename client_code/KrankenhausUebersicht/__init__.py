@@ -25,7 +25,6 @@ class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
       if len(self.layout.drop_down_krankenhaus.items) > 0 and self.layout.link_krankenhaus.role == 'selected':
         print(self.layout.drop_down_krankenhaus.selected_value)
         return_value = anvil.server.call('get_coordinates', self.layout.drop_down_krankenhaus.selected_value)
-        print(return_value)
         coordinates = return_value[0]
 
         self.map_krankenhaus.clear()

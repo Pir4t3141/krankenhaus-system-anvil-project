@@ -23,6 +23,9 @@ class StationenUebersicht(StationenUebersichtTemplate):
     """This method is called when the drop down element has changed"""
     try:
       if len(self.layout.drop_down_krankenhaus.items) > 0 and self.layout.link_krankenhaus.role == 'selected':
-        pass
+        return_value = anvil.server.call('get_station_info', self.layout.drop_down_krankenhaus.selected_value)
+        for d in return_value:
+          d["krankenhaus_name"] = self.layout.drop_down_krankenhaus.selected_value
+        self.repeating_panel_stationeninfo = return_value
     finally:
       pass
