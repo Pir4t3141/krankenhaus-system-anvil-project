@@ -24,8 +24,7 @@ class StationenUebersicht(StationenUebersichtTemplate):
     try:
       if len(self.layout.drop_down_krankenhaus.items) > 0 and self.layout.link_krankenhaus.role == 'selected':
         return_value = anvil.server.call('get_station_info', self.layout.drop_down_krankenhaus.selected_value)
-        for d in return_value:
-          d["krankenhaus_name"] = self.layout.drop_down_krankenhaus.selected_value
-        self.repeating_panel_stationeninfo = return_value
+        print(return_value)
+        self.repeating_panel_stationeninfo.items = return_value
     finally:
       pass

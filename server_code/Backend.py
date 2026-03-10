@@ -23,6 +23,8 @@ def get_coordinates(krankenhaus_name: str):
 @anvil.server.callable
 def get_station_info(krankenhaus_name: str):
   with sqlite3.connect(data_files["krankenhaus.db"]) as conn:
+    conn.row_factory = sqlite3.Row
     cur = conn.cursor()
-    result = cur.execute(f"SELECT f.bezeichnung AS stationenfachrichtung, COUNT(z.zimmer_id) AS zimmeranzahl FROM station s JOIN fachrichtung f ON s.fachrichtung_id = f.fachrichtung_id JOIN zimmer z on z.station_id = s.station_id JOIN krankenhaus k on k.krankenhaus_id = s.krankenhaus_id WHERE k.name = {krankenhaus_name} GROUP BY s.station_id;").fetchtall()
+    result = cur.execute(f"SELECT f.bezeichnung AS stationenfachrichtung, COUNT(z.zimmer_id) AS zimmeranzahl FROM station s JOIN fachrichtung f ON s.fachrichtung_id = f.fachrichtung_id JOIN zimmer z on z.station_id = s.station_id JOIN krankenhaus k on k.krankenhaus_id = s.krankenhaus_id WHERE k.name = '{krankenhaus_name}' GROUP BY s.station_id;").fetchall()
+    print(result)  
   return [dict(row) for row in result]
