@@ -12,7 +12,7 @@ class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens. 
-    self.layout.set_event_handler('drop_down_krankenhaus_has_changed', self.drop_down_krankenhaus_has_changed)
+    self.layout.add_event_handler('drop_down_krankenhaus_has_changed', self.drop_down_krankenhaus_has_changed)
 
   @handle("", "show")
   def form_show(self, **event_args):
