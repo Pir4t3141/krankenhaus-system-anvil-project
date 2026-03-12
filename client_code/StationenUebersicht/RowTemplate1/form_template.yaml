@@ -1,3 +1,8 @@
-components: []
+components:
+- event_bindings: {}
+  layout_properties: {column: KAAXNU}
+  name: button_dashboard
+  properties: {text: Dashboard}
+  type: Button
 container: {type: DataRowPanel}
 is_package: true

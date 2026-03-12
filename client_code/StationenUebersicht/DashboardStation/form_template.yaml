@@ -1,0 +1,33 @@
+components:
+- components:
+  - event_bindings: {}
+    layout_properties: {grid_position: 'BPHXNS,TRQCOK'}
+    name: link_stationenUebersicht
+    properties: {text: <--- Stationen Übersicht}
+    type: Link
+  - components:
+    - layout_properties: {grid_position: 'GHETTY,VJGPFC'}
+      name: plot_1
+      properties: {height: 116.4000244140625}
+      type: Plot
+    layout_properties: {grid_position: 'FSIGOQ,PMILAG'}
+    name: outlined_card_1
+    properties: {role: outlined-card}
+    type: ColumnPanel
+  layout_properties: {slot: default}
+  name: content_panel
+  properties: {}
+  type: ColumnPanel
+- layout_properties: {slot: nav-right}
+  name: navbar_links
+  properties: {}
+  type: FlowPanel
+- event_bindings: {}
+  layout_properties: {slot: title}
+  name: label_station
+  properties: {}
+  type: Label
+container:
+  properties: {html: '@theme:standard-page.html'}
+  type: HtmlTemplate
+is_package: true

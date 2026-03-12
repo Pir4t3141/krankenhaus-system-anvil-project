@@ -25,15 +25,9 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
     """This method is called when the link is clicked"""
     open_form('StationenUebersicht')
 
-  @handle("link_zimmer", "click")
-  def link_zimmer_click(self, **event_args):
-    """This method is called when the link is clicked"""
-    open_form('ZimmerUebersicht')
-
   def reset_links(self, **event_args):
     self.link_krankenhaus.role = ''
     self.link_stationen.role = ''
-    self.link_zimmer.role = ''
 
   def drop_down_krankenhaus_fill(self, **event_args):
     return_value = anvil.server.call('get_krankenhaeuser')

@@ -14,6 +14,7 @@ components_by_slot:
       columns:
       - {data_key: stationenfachrichtung, id: JKSDUP, title: Stationenfachrichtung}
       - {data_key: zimmeranzahl, id: VJQQOR, title: Zimmeranzahl}
+      - {data_key: dashboard, id: KAAXNU, title: Dashboard}
     type: DataGrid
 is_package: true
 layout:

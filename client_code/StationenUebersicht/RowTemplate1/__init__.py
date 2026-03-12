@@ -12,3 +12,9 @@ class RowTemplate1(RowTemplate1Template):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+
+  @handle("button_dashboard", "click")
+  def button_dashboard_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('StationenUebersicht.DashboardStation', self.item)
+    

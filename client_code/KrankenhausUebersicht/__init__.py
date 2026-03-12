@@ -7,13 +7,15 @@ import anvil.server
 
 
 class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
-  def __init__(self, **properties):
+  def __init__(self, krankenhausname=None, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens. 
     self.layout.add_event_handler('drop_down_krankenhaus_has_changed', self.drop_down_krankenhaus_has_changed)
-
+    if krankenhausname is not None:
+      self.layout.drop_down_krankenhaus.selected_value = krankenhausname
+  
   @handle("", "show")
   def form_show(self, **event_args):
     self.layout.reset_links()

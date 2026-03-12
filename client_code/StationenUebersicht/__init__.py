@@ -7,12 +7,16 @@ import anvil.server
 
 
 class StationenUebersicht(StationenUebersichtTemplate):
-  def __init__(self, **properties):
+  def __init__(self, krankenhausname=None, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
     self.layout.add_event_handler('drop_down_krankenhaus_has_changed', self.drop_down_krankenhaus_has_changed)
+    if krankenhausname is not None:
+      self.layout.drop_down_krankenhaus.selected_value = krankenhausname 
+      self.drop_down_krankenhaus_has_changed()
+
 
   @handle("", "show")
   def form_show(self, **event_args):
@@ -25,6 +29,8 @@ class StationenUebersicht(StationenUebersichtTemplate):
     try:
       if len(self.layout.drop_down_krankenhaus.items) > 0 and self.layout.link_stationen.role == 'selected':
         return_value = anvil.server.call('get_station_info', self.layout.drop_down_krankenhaus.selected_value)
+        for d in return_value:
+          d["krankenhausname"] = self.layout.drop_down_krankenhaus.selected_value
         print(return_value)
         self.repeating_panel_stationeninfo.items = return_value
     finally:
