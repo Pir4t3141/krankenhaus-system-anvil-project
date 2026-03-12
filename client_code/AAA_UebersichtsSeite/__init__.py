@@ -13,17 +13,16 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     # Any code you write here will run before the form opens.
-    self.link_krankenhaus.role = 'selected'
     
   @handle("link_krankenhaus", "click")
   def link_krankenhaus_click(self, **event_args):
     """This method is called when the link is clicked"""
-    open_form('KrankenhausUebersicht')
+    open_form('KrankenhausUebersicht', self.drop_down_krankenhaus.selected_value)
 
   @handle("link_stationen", "click")
   def link_stationen_click(self, **event_args):
     """This method is called when the link is clicked"""
-    open_form('StationenUebersicht')
+    open_form('StationenUebersicht', self.drop_down_krankenhaus.selected_value)
 
   def reset_links(self, **event_args):
     self.link_krankenhaus.role = ''
