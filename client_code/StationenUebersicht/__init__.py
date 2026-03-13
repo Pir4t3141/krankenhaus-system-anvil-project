@@ -15,7 +15,6 @@ class StationenUebersicht(StationenUebersichtTemplate):
     self.layout.add_event_handler('drop_down_krankenhaus_has_changed', self.drop_down_krankenhaus_has_changed)
     if krankenhausname is not None:
       self.layout.drop_down_krankenhaus.selected_value = krankenhausname 
-      self.drop_down_krankenhaus_has_changed()
 
 
   @handle("", "show")

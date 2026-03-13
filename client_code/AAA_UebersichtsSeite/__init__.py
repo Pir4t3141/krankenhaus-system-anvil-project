@@ -8,11 +8,10 @@ import anvil.server
 
 class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
 
-  
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    # Any code you write here will run before the form opens.
+    # Any code you write here will run before the form opens
     
   @handle("link_krankenhaus", "click")
   def link_krankenhaus_click(self, **event_args):

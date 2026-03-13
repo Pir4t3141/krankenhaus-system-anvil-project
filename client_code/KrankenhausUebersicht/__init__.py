@@ -15,11 +15,12 @@ class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
     self.layout.add_event_handler('drop_down_krankenhaus_has_changed', self.drop_down_krankenhaus_has_changed)
     if krankenhausname is not None:
       self.layout.drop_down_krankenhaus.selected_value = krankenhausname
-  
+
   @handle("", "show")
   def form_show(self, **event_args):
     self.layout.reset_links()
     self.layout.link_krankenhaus.role = 'selected'
+    self.drop_down_krankenhaus_has_changed()
 
   def drop_down_krankenhaus_has_changed(self, **event_args):
     """This method is called when the drop down element has changed"""
