@@ -9,7 +9,12 @@ components:
     - event_bindings: {}
       layout_properties: {grid_position: 'GHETTY,VJGPFC'}
       name: plot_zimmerbelegung
-      properties: {height: '500'}
+      properties: {height: '450'}
+      type: Plot
+    - event_bindings: {}
+      layout_properties: {grid_position: 'GHETTY,CHACNQ'}
+      name: plot_personal
+      properties: {}
       type: Plot
     layout_properties: {grid_position: 'FSIGOQ,PMILAG'}
     name: outlined_card_1
