@@ -30,7 +30,8 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
   def drop_down_krankenhaus_fill(self, **event_args):
     return_value = anvil.server.call('get_krankenhaeuser')
     print(return_value)
-    return_value = [entry[1] for entry in return_value]
+    return_value = [entry[3] for entry in return_value]
+    print(return_value)
     self.drop_down_krankenhaus.items = return_value
     self.drop_down_krankenhaus_change()
 
