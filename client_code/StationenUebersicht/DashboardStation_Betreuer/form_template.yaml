@@ -1,0 +1,43 @@
+components:
+- components:
+  - event_bindings: {}
+    layout_properties: {grid_position: 'BPHXNS,TRQCOK'}
+    name: link_stationUebersicht
+    properties: {text: <--- Station Übersicht}
+    type: Link
+  - components:
+    - name: repeating_panel_betreuer_info
+      properties: {item_template: StationenUebersicht.DashboardStation_Aerzte.RowTemplate2}
+      type: RepeatingPanel
+    event_bindings: {}
+    layout_properties: {grid_position: 'QYQNRL,JCQWOC'}
+    name: data_grid_betreuer_info
+    properties:
+      columns:
+      - {data_key: name, id: JKSDUP, title: Name}
+      - {data_key: anzahl_behandlungen, id: VJQQOR, title: Behandlungen}
+      - {data_key: anzahl_diagnosen, id: OJLQEN, title: Diagnosen}
+      - {data_key: anzahl_betreute_aufnahmen, id: IOOQJM, title: Betreute Aufnahmen}
+    type: DataGrid
+  - components: []
+    layout_properties: {grid_position: 'FSIGOQ,PMILAG'}
+    name: outlined_card_1
+    properties: {role: outlined-card}
+    type: ColumnPanel
+  layout_properties: {slot: default}
+  name: content_panel
+  properties: {}
+  type: ColumnPanel
+- layout_properties: {slot: nav-right}
+  name: navbar_links
+  properties: {}
+  type: FlowPanel
+- event_bindings: {}
+  layout_properties: {slot: title}
+  name: label_betreuer
+  properties: {}
+  type: Label
+container:
+  properties: {html: '@theme:standard-page.html'}
+  type: HtmlTemplate
+is_package: true

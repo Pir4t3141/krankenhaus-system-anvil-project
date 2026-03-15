@@ -45,8 +45,8 @@ class DashboardStation(DashboardStationTemplate):
       'title': {'text': 'Personalverteilung'}
     }
     self.plot_personal.data = go.Pie(
-      labels=["Ärzte", "Pfleger"],
-      values=[return_values["anzahl_aerzte"], return_values["anzahl_pfleger"]])
+      labels=["Ärzte", "Betreuer"],
+      values=[return_values["anzahl_aerzte"], return_values["anzahl_betreuer"]])
 
   @handle("plot_personal", "click")
   def plot_personal_click(self, points, **event_args):
@@ -54,4 +54,6 @@ class DashboardStation(DashboardStationTemplate):
     point_number = points[0]["point_number"]
     if point_number == 0:
       open_form('StationenUebersicht.DashboardStation_Aerzte', self.row_dict)
+    if point_number == 1:
+      open_form('StationenUebersicht.DashboardStation_Betreuer', self.row_dict)
       
