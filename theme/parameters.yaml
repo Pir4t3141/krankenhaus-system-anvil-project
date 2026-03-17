@@ -332,3 +332,4 @@ roles:
 - components: [TextBox, TextArea, DatePicker, DropDown]
   name: input-error
 - {components: null, name: click_hand}
+- {name: normal_hand}

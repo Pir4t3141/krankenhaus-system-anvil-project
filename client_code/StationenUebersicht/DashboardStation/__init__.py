@@ -58,5 +58,10 @@ class DashboardStation(DashboardStationTemplate):
   @handle("plot_personal", "hover")
   def plot_personal_hover(self, points, **event_args):
     """This method is called when a data point is hovered."""
-    c
+    self.role = "click_hand"
+
+  @handle("plot_personal", "unhover")
+  def plot_personal_unhover(self, points, **event_args):
+    """This method is called when a data point is unhovered."""
+    self.role = "normal_hand"
       
