@@ -1,0 +1,23 @@
+components_by_slot:
+  content_slot:
+  - layout_properties: {}
+    name: text_box_patientensuche
+    properties: {}
+    type: TextBox
+  - components:
+    - name: repeating_panel_1
+      properties: {item_template: PatientenUebersicht.RowTemplate3}
+      type: RepeatingPanel
+    layout_properties: {}
+    name: data_grid_1
+    properties:
+      columns:
+      - {data_key: column_1, id: JKSDUP, title: Column 1}
+      - {data_key: column_2, id: VJQQOR, title: Column 2}
+      - {data_key: column_3, id: OJLQEN, title: Column 3}
+    type: DataGrid
+is_package: true
+layout:
+  event_bindings: {}
+  form_event_bindings: {}
+  type: form:AAA_UebersichtsSeite

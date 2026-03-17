@@ -6,7 +6,6 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 
-
 class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
   def __init__(self, krankenhausname=None, **properties):
     # Set Form properties and Data Bindings.

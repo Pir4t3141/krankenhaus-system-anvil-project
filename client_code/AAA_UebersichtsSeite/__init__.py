@@ -23,9 +23,15 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
     """This method is called when the link is clicked"""
     open_form('StationenUebersicht', self.drop_down_krankenhaus.selected_value)
 
+  @handle("link_patienten", "click")
+  def link_patienten_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    open_form('PatientenUebersicht', self.drop_down_krankenhaus.selected_value)
+  
   def reset_links(self, **event_args):
     self.link_krankenhaus.role = ''
     self.link_stationen.role = ''
+    self.link_patienten.role = ''
 
   def drop_down_krankenhaus_fill(self, **event_args):
     return_value = anvil.server.call('get_krankenhaeuser')
@@ -42,4 +48,6 @@ class AAA_UebersichtsSeite(AAA_UebersichtsSeiteTemplate):
   def drop_down_krankenhaus_show(self, **event_args):
     """This method is called when the DropDown is shown on the screen"""
     self.drop_down_krankenhaus_fill()
+
+
     
