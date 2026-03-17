@@ -28,7 +28,6 @@ class DashboardStation(DashboardStationTemplate):
   def plot_zimmerbelegung_show(self, **event_args):
     """This method is called when the Plot is shown on the screen"""
     return_values = anvil.server.call('get_einzelne_stationen_info', self.row_dict["krankenhausname"], self.row_dict["station_id"])[0]
-    print(return_values)
     self.plot_zimmerbelegung.layout = {
       'title': {'text': 'Bettenbelegung'}
     }
@@ -40,7 +39,6 @@ class DashboardStation(DashboardStationTemplate):
   def plot_personal_show(self, **event_args):
     """This method is called when the Plot is shown on the screen"""
     return_values = anvil.server.call('get_arzt_betreuer_per_station', self.row_dict["station_id"])[0]
-    print(return_values)
     self.plot_personal.layout = {
       'title': {'text': 'Personalverteilung'}
     }

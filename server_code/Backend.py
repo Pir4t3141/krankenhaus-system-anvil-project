@@ -59,3 +59,11 @@ def get_betreuer_stats(station_id: int):
     cur = conn.cursor()
     result = cur.execute(f"SELECT b.betreuer_id, b.vorname || ' ' || b.nachname AS name, COUNT(DISTINCT ab.aufnahme_id) AS anzahl_betreute_aufnahmen, COUNT(DISTINCT au.patient_id) AS anzahl_verschiedene_patienten FROM betreuer b JOIN station s ON b.station_id = s.station_id JOIN krankenhaus k ON s.krankenhaus_id = k.krankenhaus_id LEFT JOIN aufnahme_betreuer ab ON b.betreuer_id = ab.betreuer_id LEFT JOIN aufnahme au ON ab.aufnahme_id = au.aufnahme_id WHERE s.station_id = {station_id} GROUP BY b.betreuer_id;").fetchall()
   return [dict(row) for row in result]
+
+@anvil.server.callable
+def get_count_of_artz_and_betreuer(krankenhaus_name: str):
+  with sqlite3.connect(data_files["krankenhaus.db"]) as conn:
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    result = cur.execute(f"SELECT f.bezeichnung, COUNT(DISTINCT a.arzt_id) AS anzahl_aerzte, COUNT(DISTINCT b.betreuer_id) AS anzahl_betreuer FROM station s JOIN fachrichtung f ON s.fachrichtung_id = f.fachrichtung_id JOIN krankenhaus k ON s.krankenhaus_id = k.krankenhaus_id LEFT JOIN arzt a ON a.station_id = s.station_id LEFT JOIN betreuer b ON b.station_id = s.station_id WHERE k.name = '{krankenhaus_name}' GROUP BY s.station_id;").fetchall()
+  return [dict(row) for row in result]

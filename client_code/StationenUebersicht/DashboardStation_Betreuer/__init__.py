@@ -29,5 +29,4 @@ class DashboardStation_Betreuer(DashboardStation_BetreuerTemplate):
   def data_grid_betreuer_info_show(self, **event_args):
     """This method is called when the data grid is shown on the screen"""
     return_value = anvil.server.call("get_betreuer_stats", self.row_dict["station_id"])
-    print(return_value)
     self.repeating_panel_betreuer_info.items = return_value

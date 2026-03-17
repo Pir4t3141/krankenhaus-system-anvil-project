@@ -26,7 +26,6 @@ class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
     """This method is called when the drop down element has changed"""
     try:
       if len(self.layout.drop_down_krankenhaus.items) > 0 and self.layout.link_krankenhaus.role == 'selected':
-        print(self.layout.drop_down_krankenhaus.selected_value)
         return_value = anvil.server.call('get_coordinates', self.layout.drop_down_krankenhaus.selected_value)
         coordinates = return_value[0]
 
