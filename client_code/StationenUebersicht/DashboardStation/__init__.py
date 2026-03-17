@@ -54,4 +54,9 @@ class DashboardStation(DashboardStationTemplate):
       open_form('StationenUebersicht.DashboardStation_Aerzte', self.row_dict)
     if point_number == 1:
       open_form('StationenUebersicht.DashboardStation_Betreuer', self.row_dict)
+
+  @handle("plot_personal", "hover")
+  def plot_personal_hover(self, points, **event_args):
+    """This method is called when a data point is hovered."""
+    c
       

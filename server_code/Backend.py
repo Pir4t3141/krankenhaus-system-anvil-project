@@ -67,3 +67,11 @@ def get_count_of_artz_and_betreuer(krankenhaus_name: str):
     cur = conn.cursor()
     result = cur.execute(f"SELECT f.bezeichnung, COUNT(DISTINCT a.arzt_id) AS anzahl_aerzte, COUNT(DISTINCT b.betreuer_id) AS anzahl_betreuer FROM station s JOIN fachrichtung f ON s.fachrichtung_id = f.fachrichtung_id JOIN krankenhaus k ON s.krankenhaus_id = k.krankenhaus_id LEFT JOIN arzt a ON a.station_id = s.station_id LEFT JOIN betreuer b ON b.station_id = s.station_id WHERE k.name = '{krankenhaus_name}' GROUP BY s.station_id;").fetchall()
   return [dict(row) for row in result]
+
+@anvil.server.callable
+def get_krankenhaus_info(krankenhaus_name: str):
+  with sqlite3.connect(data_files["krankenhaus.db"]) as conn:
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    result = cur.execute(f"SELECT k.name AS krankenhaus, (SELECT COUNT(*) FROM arzt a JOIN station s ON a.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS anzahl_aerzte, (SELECT COUNT(*) FROM betreuer b JOIN station s ON b.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS anzahl_pfleger, (SELECT COUNT(*) FROM zimmer z JOIN station s ON z.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS anzahl_zimmer, (SELECT SUM(z.bettenanzahl) FROM zimmer z JOIN station s ON z.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS gesamtbetten_kapazitaet, (SELECT COUNT(*) FROM belegt bel JOIN zimmer z ON bel.zimmer_id = z.zimmer_id JOIN station s ON z.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id AND (bel.ende IS NULL OR bel.ende > DATE('now'))) AS belegte_betten_aktuell FROM krankenhaus k WHERE k.name = '{krankenhaus_name}';").fetchall()
+  return [dict(row) for row in result]

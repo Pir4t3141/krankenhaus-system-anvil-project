@@ -32,17 +32,15 @@ class StationenUebersicht(StationenUebersichtTemplate):
         for d in return_value:
           d["krankenhausname"] = self.layout.drop_down_krankenhaus.selected_value
         self.repeating_panel_stationeninfo.items = return_value
+        self.change_plot_personalverteilung()
     finally:
       pass
 
-  @handle("plot_personalverteilung", "show")
-  def plot_personalverteilung_show(self, **event_args):
+  def change_plot_personalverteilung(self):
     """This method is called when the Plot is shown on the screen"""
     krankenhausname = self.layout.drop_down_krankenhaus.selected_value
-    print(krankenhausname)
     return_values = anvil.server.call('get_count_of_artz_and_betreuer', krankenhausname)
-    print(return_values)
-
+    
     stationen = [d['bezeichnung'] for d in return_values]
     aerzte = [d['anzahl_aerzte'] for d in return_values]
     betreuer = [d['anzahl_betreuer'] for d in return_values]
@@ -51,6 +49,6 @@ class StationenUebersicht(StationenUebersichtTemplate):
       go.Bar(name='Ärzte', x=stationen, y=aerzte),
       go.Bar(name='Betreuer', x=stationen, y=betreuer)
     ])
-    fig.update_layout(barmode='stack', title = 'Personalverteilung', xaxis_title="Station", yaxis_title="Personal Anzahl", legend_title="Personalart")
+    fig.update_layout(barmode='stack', title_text = 'Personalverteilung', xaxis_title="Station", yaxis_title="Personal Anzahl", legend_title="Personalart")
     
     self.plot_personalverteilung.figure = fig

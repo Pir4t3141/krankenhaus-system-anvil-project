@@ -1,5 +1,6 @@
 from ._anvil_designer import KrankenhausUebersichtTemplate
 from anvil import *
+import plotly.graph_objects as go
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
@@ -39,5 +40,29 @@ class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
         self.map_krankenhaus.zoom = 20
         self.map_krankenhaus.center = GoogleMap.LatLng(coordinates[0], coordinates[1])
         self.map_krankenhaus.add_component(marker)
+
+        self.change_plot_personal()
     finally:
       pass
+
+  def change_plot_personal(self):
+    """This method is called when the Plot is shown on the screen"""
+    return_values = anvil.server.call('get_krankenhaus_info', self.layout.drop_down_krankenhaus.selected_value)[0]
+    self.plot_personal.layout = {
+      'title': {'text': 'Personalverteilung'}
+    }
+    self.plot_personal.data = go.Pie(
+      labels=["Ärzte", "Pfleger"],
+      values=[return_values["anzahl_aerzte"], return_values["anzahl_pfleger"]]
+    )
+    
+    def change_plot_bettenanzahl(self):
+      """This method is called when the Plot is shown on the screen"""
+    return_values = anvil.server.call('get_krankenhaus_info', self.layout.drop_down_krankenhaus.selected_value)[0]
+    self.plot_bettenanzahl.layout = {
+      'title': {'text': 'Bettenverteilung'}
+    }
+    self.plot_bettenanzahl.data = go.Pie(
+      labels=["Belegt", "Frei"],
+      values=[return_values["belegte_betten_aktuell"], return_values["gesamtbetten_kapazitaet"]-return_values["belegte_betten_aktuell"]]
+    )
