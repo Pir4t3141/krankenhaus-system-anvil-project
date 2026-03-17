@@ -75,3 +75,11 @@ def get_krankenhaus_info(krankenhaus_name: str):
     cur = conn.cursor()
     result = cur.execute(f"SELECT k.name AS krankenhaus, (SELECT COUNT(*) FROM arzt a JOIN station s ON a.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS anzahl_aerzte, (SELECT COUNT(*) FROM betreuer b JOIN station s ON b.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS anzahl_pfleger, (SELECT COUNT(*) FROM zimmer z JOIN station s ON z.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS anzahl_zimmer, (SELECT SUM(z.bettenanzahl) FROM zimmer z JOIN station s ON z.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS gesamtbetten_kapazitaet, (SELECT COUNT(*) FROM belegt bel JOIN zimmer z ON bel.zimmer_id = z.zimmer_id JOIN station s ON z.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id AND (bel.ende IS NULL OR bel.ende > DATE('now'))) AS belegte_betten_aktuell FROM krankenhaus k WHERE k.name = '{krankenhaus_name}';").fetchall()
   return [dict(row) for row in result]
+
+@anvil.server.callable
+def get_patienten_info(krankenhaus_name: str):
+  with sqlite3.connect(data_files["krankenhaus.db"]) as conn:
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    result = cur.execute(f"SELECT DISTINCT p.patient_id, p.vorname || ' ' || p.nachname AS name, p.svn, p.adresse FROM Patient p JOIN Aufnahme a ON p.patient_id = a.patient_id JOIN aufnahme_betreuer ab ON a.aufnahme_id = ab.aufnahme_id JOIN Betreuer b ON ab.betreuer_id = b.betreuer_id JOIN Station s ON b.station_id = s.station_id JOIN Krankenhaus k ON s.krankenhaus_id = k.krankenhaus_id WHERE k.Name = '{krankenhaus_name}' ORDER BY p.patient_id ASC;").fetchall()
+  return [dict(row) for row in result]

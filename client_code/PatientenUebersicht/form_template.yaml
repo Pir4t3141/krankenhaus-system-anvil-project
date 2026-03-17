@@ -1,20 +1,31 @@
 components_by_slot:
   content_slot:
-  - layout_properties: {}
-    name: text_box_patientensuche
-    properties: {}
-    type: TextBox
   - components:
-    - name: repeating_panel_1
+    - event_bindings: {}
+      layout_properties: {grid_position: 'MGLAUO,ZJEXDX'}
+      name: text_box_patientenID
+      properties: {placeholder: PatientenID}
+      type: TextBox
+    - layout_properties: {grid_position: 'MGLAUO,SFDQSI'}
+      name: text_box_patientensuche
+      properties: {placeholder: Patientenname}
+      type: TextBox
+    layout_properties: {}
+    name: outlined_card_1
+    properties: {role: outlined-card}
+    type: ColumnPanel
+  - components:
+    - name: repeating_panel_patient
       properties: {item_template: PatientenUebersicht.RowTemplate3}
       type: RepeatingPanel
     layout_properties: {}
-    name: data_grid_1
+    name: data_grid_patient
     properties:
       columns:
-      - {data_key: column_1, id: JKSDUP, title: Column 1}
-      - {data_key: column_2, id: VJQQOR, title: Column 2}
-      - {data_key: column_3, id: OJLQEN, title: Column 3}
+      - {data_key: patient_id, id: JKSDUP, title: PatientID}
+      - {data_key: name, id: VJQQOR, title: Name}
+      - {data_key: svn, id: OJLQEN, title: SVN}
+      - {data_key: adresse, id: ZEKUTF, title: Adresse}
     type: DataGrid
 is_package: true
 layout:
