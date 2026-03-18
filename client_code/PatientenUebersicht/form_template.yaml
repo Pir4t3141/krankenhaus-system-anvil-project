@@ -6,10 +6,21 @@ components_by_slot:
       name: text_box_patientenID
       properties: {placeholder: PatientenID}
       type: TextBox
-    - layout_properties: {grid_position: 'MGLAUO,SFDQSI'}
-      name: text_box_patientensuche
+    - event_bindings: {}
+      layout_properties: {grid_position: 'MGLAUO,SFDQSI'}
+      name: text_box_patientenname
       properties: {placeholder: Patientenname}
       type: TextBox
+    - event_bindings: {}
+      layout_properties: {grid_position: 'ZAVEAO,SETAGR'}
+      name: radio_button_krankenhaus
+      properties: {group_name: krankenhaus_suche, text: Nur 1 Krankenhaus, value: one_only}
+      type: RadioButton
+    - event_bindings: {}
+      layout_properties: {grid_position: 'HRMOGJ,JYIUVA'}
+      name: radio_button_alle
+      properties: {group_name: krankenhaus_suche, text: Alle Krankenhäuser, value: all}
+      type: RadioButton
     layout_properties: {}
     name: outlined_card_1
     properties: {role: outlined-card}
@@ -26,6 +37,8 @@ components_by_slot:
       - {data_key: name, id: VJQQOR, title: Name}
       - {data_key: svn, id: OJLQEN, title: SVN}
       - {data_key: adresse, id: ZEKUTF, title: Adresse}
+      - {data_key: column_1, id: WUZDUJ, title: Dashboard}
+      rows_per_page: 500
     type: DataGrid
 is_package: true
 layout:

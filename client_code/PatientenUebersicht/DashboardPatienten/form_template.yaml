@@ -1,0 +1,39 @@
+components:
+- components:
+  - event_bindings: {}
+    layout_properties: {grid_position: 'BPHXNS,TRQCOK'}
+    name: link_patientenUebersicht
+    properties: {text: <--- Patienten Übersicht}
+    type: Link
+  - components:
+    - name: repeating_panel_diagnose
+      properties: {item_template: PatientenUebersicht.DashboardPatienten.RowTemplate4}
+      type: RepeatingPanel
+    event_bindings: {}
+    layout_properties: {grid_position: 'ZUTDKQ,CPHEYT'}
+    name: data_grid_diagnose
+    properties:
+      columns:
+      - {data_key: diagnose, id: JKSDUP, title: Diagnose}
+      - {data_key: icd_code, id: VJQQOR, title: ICD CODE}
+      - {data_key: icd_version, id: OJLQEN, title: ICD VERSION}
+      - {data_key: feststelldatum, id: KFBUHQ, title: Feststelldatum}
+      - {data_key: schweregrad, id: ROSCMU, title: Schweregrad}
+    type: DataGrid
+  layout_properties: {slot: default}
+  name: content_panel
+  properties: {}
+  type: ColumnPanel
+- layout_properties: {slot: nav-right}
+  name: navbar_links
+  properties: {}
+  type: FlowPanel
+- event_bindings: {}
+  layout_properties: {slot: title}
+  name: label_patient
+  properties: {}
+  type: Label
+container:
+  properties: {html: '@theme:standard-page.html'}
+  type: HtmlTemplate
+is_package: true

@@ -83,3 +83,19 @@ def get_patienten_info(krankenhaus_name: str):
     cur = conn.cursor()
     result = cur.execute(f"SELECT DISTINCT p.patient_id, p.vorname || ' ' || p.nachname AS name, p.svn, p.adresse FROM Patient p JOIN Aufnahme a ON p.patient_id = a.patient_id JOIN aufnahme_betreuer ab ON a.aufnahme_id = ab.aufnahme_id JOIN Betreuer b ON ab.betreuer_id = b.betreuer_id JOIN Station s ON b.station_id = s.station_id JOIN Krankenhaus k ON s.krankenhaus_id = k.krankenhaus_id WHERE k.Name = '{krankenhaus_name}' ORDER BY p.patient_id ASC;").fetchall()
   return [dict(row) for row in result]
+
+@anvil.server.callable
+def get_patienten_diagnosis(patient_id: int):
+  with sqlite3.connect(data_files["krankenhaus.db"]) as conn:
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    result = cur.execute(f"SELECT d.Beschreibung AS diagnose, d.icd_code, d.icd_version, pd.feststelldatum, pd.schweregrad FROM Patient p JOIN Aufnahme a ON p.patient_id = a.patient_id JOIN PD pd ON a.aufnahme_id = pd.aufnahme_id JOIN Diagnose d ON pd.diagnose_id = d.diagnose_id WHERE p.patient_id = {patient_id} ORDER BY CASE WHEN pd.schweregrad = 'HOCH' THEN 1 WHEN pd.schweregrad = 'MITTEL' THEN 2 ELSE 3 END;").fetchall()
+  return [dict(row) for row in result]
+
+@anvil.server.callable
+def get_patienten_info_alle_krankenhaueser(krankenhaus_name: str):
+  with sqlite3.connect(data_files["krankenhaus.db"]) as conn:
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    result = cur.execute("SELECT DISTINCT p.patient_id, p.vorname || ' ' || p.nachname AS name, p.svn, p.adresse FROM Patient p JOIN Aufnahme a ON p.patient_id = a.patient_id JOIN aufnahme_betreuer ab ON a.aufnahme_id = ab.aufnahme_id JOIN Betreuer b ON ab.betreuer_id = b.betreuer_id JOIN Station s ON b.station_id = s.station_id JOIN Krankenhaus k ON s.krankenhaus_id = k.krankenhaus_id ORDER BY p.patient_id ASC;").fetchall()
+  return [dict(row) for row in result]
