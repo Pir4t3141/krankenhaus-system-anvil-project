@@ -15,8 +15,8 @@ components:
     properties:
       columns:
       - {data_key: name, id: JKSDUP, title: Name}
-      - {data_key: anzahl_behandlungen, id: VJQQOR, title: Behandlungen}
-      - {data_key: anzahl_diagnosen, id: OJLQEN, title: Diagnosen}
+      - {data_key: anzahl_betreute_aufnahmen, id: VJQQOR, title: Betreute Aufnahmen}
+      - {data_key: anzahl_verschiedene_patienten, id: OJLQEN, title: Patienten}
       - {data_key: anzahl_betreute_aufnahmen, id: IOOQJM, title: Betreute Aufnahmen}
     type: DataGrid
   - components: []
