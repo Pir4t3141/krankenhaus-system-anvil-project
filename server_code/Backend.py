@@ -73,7 +73,7 @@ def get_krankenhaus_info(krankenhaus_name: str):
   with sqlite3.connect(data_files["krankenhaus.db"]) as conn:
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
-    result = cur.execute(f"SELECT k.name AS krankenhaus, (SELECT COUNT(*) FROM arzt a JOIN station s ON a.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS anzahl_aerzte, (SELECT COUNT(*) FROM betreuer b JOIN station s ON b.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS anzahl_pfleger, (SELECT COUNT(*) FROM zimmer z JOIN station s ON z.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS anzahl_zimmer, (SELECT SUM(z.bettenanzahl) FROM zimmer z JOIN station s ON z.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS gesamtbetten_kapazitaet, (SELECT COUNT(*) FROM belegt bel JOIN zimmer z ON bel.zimmer_id = z.zimmer_id JOIN station s ON z.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id AND (bel.ende IS NULL OR bel.ende > DATE('now'))) AS belegte_betten_aktuell FROM krankenhaus k WHERE k.name = '{krankenhaus_name}';").fetchall()
+    result = cur.execute(f"SELECT k.name AS krankenhaus, (SELECT COUNT(*) FROM arzt a JOIN station s ON a.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS anzahl_aerzte, (SELECT COUNT(*) FROM betreuer b JOIN station s ON b.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS anzahl_betreuer, (SELECT COUNT(*) FROM zimmer z JOIN station s ON z.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS anzahl_zimmer, (SELECT SUM(z.bettenanzahl) FROM zimmer z JOIN station s ON z.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id) AS gesamtbetten_kapazitaet, (SELECT COUNT(*) FROM belegt bel JOIN zimmer z ON bel.zimmer_id = z.zimmer_id JOIN station s ON z.station_id = s.station_id WHERE s.krankenhaus_id = k.krankenhaus_id AND (bel.ende IS NULL OR bel.ende > DATE('now'))) AS belegte_betten_aktuell FROM krankenhaus k WHERE k.name = '{krankenhaus_name}';").fetchall()
   return [dict(row) for row in result]
 
 @anvil.server.callable
@@ -98,4 +98,21 @@ def get_patienten_info_alle_krankenhaueser(krankenhaus_name: str):
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
     result = cur.execute("SELECT DISTINCT p.patient_id, p.vorname || ' ' || p.nachname AS name, p.svn, p.adresse FROM Patient p JOIN Aufnahme a ON p.patient_id = a.patient_id JOIN aufnahme_betreuer ab ON a.aufnahme_id = ab.aufnahme_id JOIN Betreuer b ON ab.betreuer_id = b.betreuer_id JOIN Station s ON b.station_id = s.station_id JOIN Krankenhaus k ON s.krankenhaus_id = k.krankenhaus_id ORDER BY p.patient_id ASC;").fetchall()
+  return [dict(row) for row in result]
+
+
+@anvil.server.callable
+def get_aerzte_stats_krankenhaus(krankenhaus_name: str):
+  with sqlite3.connect(data_files["krankenhaus.db"]) as conn:
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    result = cur.execute(f"SELECT a.arzt_id, a.vorname || ' ' || a.nachname AS name, COUNT(DISTINCT ba.behandlung_id) AS anzahl_behandlungen, COUNT(DISTINCT pa.pd_id) AS anzahl_diagnosen, COUNT(DISTINCT b.aufnahme_id) AS anzahl_betreute_aufnahmen FROM arzt a JOIN station s ON a.station_id = s.station_id JOIN krankenhaus k ON s.krankenhaus_id = k.krankenhaus_id LEFT JOIN behandlung_arzt ba ON a.arzt_id = ba.arzt_id LEFT JOIN pd_arzt pa ON a.arzt_id = pa.arzt_id LEFT JOIN behandlung b ON ba.behandlung_id = b.behandlung_id WHERE k.name = '{krankenhaus_name}' GROUP BY a.arzt_id;").fetchall()
+  return [dict(row) for row in result]
+
+@anvil.server.callable
+def get_betreuer_stats_krankenhaus(krankenhaus_name: str):
+  with sqlite3.connect(data_files["krankenhaus.db"]) as conn:
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    result = cur.execute(f"SELECT b.betreuer_id, b.vorname || ' ' || b.nachname AS name, COUNT(DISTINCT ab.aufnahme_id) AS anzahl_betreute_aufnahmen, COUNT(DISTINCT au.patient_id) AS anzahl_verschiedene_patienten FROM betreuer b JOIN station s ON b.station_id = s.station_id JOIN krankenhaus k ON s.krankenhaus_id = k.krankenhaus_id LEFT JOIN aufnahme_betreuer ab ON b.betreuer_id = ab.betreuer_id LEFT JOIN aufnahme au ON ab.aufnahme_id = au.aufnahme_id WHERE k.name = '{krankenhaus_name}' GROUP BY b.betreuer_id;").fetchall()
   return [dict(row) for row in result]

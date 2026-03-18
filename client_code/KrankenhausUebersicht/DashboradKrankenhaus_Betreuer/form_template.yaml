@@ -2,8 +2,8 @@ components:
 - components:
   - event_bindings: {}
     layout_properties: {grid_position: 'BPHXNS,TRQCOK'}
-    name: link_stationUebersicht
-    properties: {text: <--- Station Übersicht}
+    name: link_krankenhausUebersicht
+    properties: {text: <--- Krankenhaus Übersicht}
     type: Link
   - components:
     - name: repeating_panel_betreuer_info

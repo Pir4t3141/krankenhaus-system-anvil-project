@@ -19,11 +19,6 @@ components:
       - {data_key: anzahl_diagnosen, id: OJLQEN, title: Diagnosen}
       - {data_key: anzahl_betreute_aufnahmen, id: IOOQJM, title: Betreute Aufnahmen}
     type: DataGrid
-  - components: []
-    layout_properties: {grid_position: 'FSIGOQ,PMILAG'}
-    name: outlined_card_1
-    properties: {role: outlined-card}
-    type: ColumnPanel
   layout_properties: {slot: default}
   name: content_panel
   properties: {}

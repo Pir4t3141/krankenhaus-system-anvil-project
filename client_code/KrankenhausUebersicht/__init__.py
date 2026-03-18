@@ -41,6 +41,7 @@ class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
         self.map_krankenhaus.add_component(marker)
 
         self.change_plot_personal()
+        self.change_plot_bettenanzahl()
     finally:
       pass
 
@@ -51,12 +52,12 @@ class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
       'title': {'text': 'Personalverteilung'}
     }
     self.plot_personal.data = go.Pie(
-      labels=["Ärzte", "Pfleger"],
-      values=[return_values["anzahl_aerzte"], return_values["anzahl_pfleger"]]
+      labels=["Ärzte", "Betreuer"],
+      values=[return_values["anzahl_aerzte"], return_values["anzahl_betreuer"]]
     )
     
-    def change_plot_bettenanzahl(self):
-      """This method is called when the Plot is shown on the screen"""
+  def change_plot_bettenanzahl(self):
+    """This method is called when the Plot is shown on the screen"""
     return_values = anvil.server.call('get_krankenhaus_info', self.layout.drop_down_krankenhaus.selected_value)[0]
     self.plot_bettenanzahl.layout = {
       'title': {'text': 'Bettenverteilung'}
@@ -65,3 +66,22 @@ class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
       labels=["Belegt", "Frei"],
       values=[return_values["belegte_betten_aktuell"], return_values["gesamtbetten_kapazitaet"]-return_values["belegte_betten_aktuell"]]
     )
+
+  @handle("plot_personal", "click")
+  def plot_personal_click(self, points, **event_args):
+    """This method is called when a data point is clicked."""
+    point_number = points[0]["point_number"]
+    if point_number == 0:
+      open_form('KrankenhausUebersicht.DashboardKrankenhaus_Aerzte', self.layout.drop_down_krankenhaus.selected_value)
+    if point_number == 1:
+      open_form('KrankenhausUebersicht.DashboradKrankenhaus_Betreuer', self.layout.drop_down_krankenhaus.selected_value)
+
+  @handle("plot_personal", "hover")
+  def plot_personal_hover(self, points, **event_args):
+    """This method is called when a data point is hovered."""
+    self.role = "click_hand"
+
+  @handle("plot_personal", "unhover")
+  def plot_personal_unhover(self, points, **event_args):
+    """This method is called when a data point is unhovered."""
+    self.role = "normal_hand"
