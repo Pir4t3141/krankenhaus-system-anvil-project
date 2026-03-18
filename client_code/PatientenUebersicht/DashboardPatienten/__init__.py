@@ -9,7 +9,7 @@ from anvil.tables import app_tables
 
 class DashboardPatienten(DashboardPatientenTemplate):
   row_dict = None
-
+  
   def __init__(self, row_dict, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
@@ -23,7 +23,7 @@ class DashboardPatienten(DashboardPatientenTemplate):
   @handle("link_patientenUebersicht", "click")
   def link_patientenUebersicht_click(self, **event_args):
     """This method is called when the link is clicked"""
-    open_form("PatientenUebersicht", self.row_dict["krankenhausname"])
+    open_form('PatientenUebersicht', self.row_dict["krankenhausname"], self.row_dict["filter"])
 
   @handle("data_grid_diagnose", "show")
   def data_grid_diagnose_show(self, **event_args):

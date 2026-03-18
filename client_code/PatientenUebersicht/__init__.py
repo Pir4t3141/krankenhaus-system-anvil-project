@@ -10,21 +10,25 @@ class PatientenUebersicht(PatientenUebersichtTemplate):
 
   unfiltered_rows = None
   
-  def __init__(self, krankenhausname=None, **properties):
+  def __init__(self, krankenhausname=None, previous_filters=None, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
     self.layout.add_event_handler('drop_down_krankenhaus_has_changed', self.drop_down_krankenhaus_has_changed)
     if krankenhausname is not None:
       self.layout.drop_down_krankenhaus.selected_value = krankenhausname
+    if previous_filters is not None:
+      
 
   def drop_down_krankenhaus_has_changed(self, **event_args):
     """This method is called when the drop down element has changed"""
     try:
       if len(self.layout.drop_down_krankenhaus.items) > 0 and self.layout.link_patienten.role == 'selected':
         return_value = anvil.server.call('get_patienten_info', self.layout.drop_down_krankenhaus.selected_value)
+        current_filter = self.export_filters()
         for d in return_value:
           d["krankenhausname"] = self.layout.drop_down_krankenhaus.selected_value
+          d["filter"] = current_filter
         self.repeating_panel_patient.items = return_value
         self.unfiltered_rows = return_value
         self.radio_button_krankenhaus.selected = True    
@@ -51,15 +55,13 @@ class PatientenUebersicht(PatientenUebersichtTemplate):
       self.text_box_patientenID.background = app.theme_colors["Error"]
       return
 
-    rows = self.repeating_panel_patient.get_components()
-    i = 0
-    for row in rows:
-      item = row.item
+    rows = []
+    
+    for item in self.unfiltered_rows:
       if (self.text_box_patientenID.text in str(item["patient_id"])) and (self.text_box_patientenname.text.lower() in item["name"].lower()):
-        rows[i].visible = True
-      else:
-        rows[i].visible = False
-      i += 1
+        rows.append(item)
+
+    self.repeating_panel_patient.items = rows
 
   @handle("text_box_patientenname", "change")
   def text_box_patientenname_change(self, **event_args):
@@ -75,8 +77,22 @@ class PatientenUebersicht(PatientenUebersichtTemplate):
   def radio_button_alle_clicked(self, **event_args):
     """This method is called when this radio button is selected"""
     return_value = anvil.server.call('get_patienten_info_alle_krankenhaueser', self.layout.drop_down_krankenhaus.selected_value)
+    current_filter = self.export_filters()
     for d in return_value:
       d["krankenhausname"] = self.layout.drop_down_krankenhaus.selected_value
+      d["filter"] = current_filter
     self.repeating_panel_patient.items = return_value
     self.unfiltered_rows = return_value
     self.filter_data_grid()
+
+  def export_filters(self):
+    current_filters = []
+    current_filters.append(self.radio_button_alle.get_group_value())
+    current_filters.append(self.text_box_patientenID.text)
+    current_filters.append(self.text_box_patientenname.text)
+    return current_filters
+
+  def import_filters(self, filters):
+    if filters[0] == "all":
+    
+    self.radio_button_alle.
