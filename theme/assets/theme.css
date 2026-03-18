@@ -1048,9 +1048,9 @@ div.plot-container.plotly svg.main-svg {
 }
 
 .anvil-role-click_hand {
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .anvil-role-normal_hand {
-  cursor: normal
+  cursor: default !important;
 }

@@ -1,14 +1,14 @@
 components_by_slot:
   content_slot:
   - components:
-    - event_bindings: {}
-      layout_properties: {grid_position: 'CGSQSD,UEIPCY'}
-      name: plot_personal
-      properties: {height: 367.3895263671875}
-      type: Plot
     - layout_properties: {grid_position: 'CGSQSD,WXFKQZ'}
       name: plot_bettenanzahl
       properties: {height: 364.28564453125}
+      type: Plot
+    - event_bindings: {}
+      layout_properties: {grid_position: 'CGSQSD,SOAZZZ'}
+      name: plot_personal
+      properties: {height: 367.3895263671875}
       type: Plot
     layout_properties: {}
     name: outlined_card_1

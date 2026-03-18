@@ -73,15 +73,15 @@ class KrankenhausUebersicht(KrankenhausUebersichtTemplate):
     point_number = points[0]["point_number"]
     if point_number == 0:
       open_form('KrankenhausUebersicht.DashboardKrankenhaus_Aerzte', self.layout.drop_down_krankenhaus.selected_value)
-    if point_number == 1:
+    elif point_number == 1:
       open_form('KrankenhausUebersicht.DashboradKrankenhaus_Betreuer', self.layout.drop_down_krankenhaus.selected_value)
 
   @handle("plot_personal", "hover")
   def plot_personal_hover(self, points, **event_args):
     """This method is called when a data point is hovered."""
-    self.role = "click_hand"
+    self.layout.role = 'click_hand'
 
   @handle("plot_personal", "unhover")
   def plot_personal_unhover(self, points, **event_args):
     """This method is called when a data point is unhovered."""
-    self.role = "normal_hand"
+    self.layout.role = 'normal_hand'
