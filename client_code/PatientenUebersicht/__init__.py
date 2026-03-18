@@ -18,7 +18,7 @@ class PatientenUebersicht(PatientenUebersichtTemplate):
     if krankenhausname is not None:
       self.layout.drop_down_krankenhaus.selected_value = krankenhausname
     if previous_filters is not None:
-      
+      self.import_filters(previous_filters)
 
   def drop_down_krankenhaus_has_changed(self, **event_args):
     """This method is called when the drop down element has changed"""
@@ -93,6 +93,6 @@ class PatientenUebersicht(PatientenUebersichtTemplate):
     return current_filters
 
   def import_filters(self, filters):
+    print(filters)
     if filters[0] == "all":
-    
-    self.radio_button_alle.
+      pass
