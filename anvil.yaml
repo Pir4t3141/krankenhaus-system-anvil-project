@@ -18,9 +18,9 @@ db_schema:
     server: full
     title: Files
 dependencies: []
-metadata: {description: Krankenhaus-System2.0 mit Navigations-Sidebar, title: Krankenhaus-System2.0}
-name: Krankenhaus-System2.0
-package_name: Krankenhaus_System2_0
+metadata: {description: Krankenhaus-System mit Navigations-Sidebar, title: Krankenhaus-System}
+name: Krankenhaus-System
+package_name: Krankenhaus_System
 renamed: true
 runtime_options:
   client_version: '3'
