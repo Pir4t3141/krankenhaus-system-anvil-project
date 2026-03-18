@@ -7,6 +7,9 @@ from anvil.tables import app_tables
 
 
 class PatientenUebersicht(PatientenUebersichtTemplate):
+
+  unfiltered_rows = None
+  
   def __init__(self, krankenhausname=None, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
@@ -23,6 +26,7 @@ class PatientenUebersicht(PatientenUebersichtTemplate):
         for d in return_value:
           d["krankenhausname"] = self.layout.drop_down_krankenhaus.selected_value
         self.repeating_panel_patient.items = return_value
+        self.unfiltered_rows = return_value
         self.radio_button_krankenhaus.selected = True    
         self.filter_data_grid()
     finally:
@@ -74,4 +78,5 @@ class PatientenUebersicht(PatientenUebersichtTemplate):
     for d in return_value:
       d["krankenhausname"] = self.layout.drop_down_krankenhaus.selected_value
     self.repeating_panel_patient.items = return_value
+    self.unfiltered_rows = return_value
     self.filter_data_grid()

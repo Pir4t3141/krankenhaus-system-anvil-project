@@ -38,7 +38,7 @@ components_by_slot:
       - {data_key: svn, id: OJLQEN, title: SVN}
       - {data_key: adresse, id: ZEKUTF, title: Adresse}
       - {data_key: column_1, id: WUZDUJ, title: Dashboard}
-      rows_per_page: 500
+      rows_per_page: 20
     type: DataGrid
 is_package: true
 layout:
