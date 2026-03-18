@@ -6,17 +6,17 @@ https://pir4t3141-krankenhaus-system.anvil.app
 
 ## ERM
 
-![ERM_Modell](ERM_Modell.drawio.png)
+![ERM_Modell](assets/ERM_Modell.drawio.png)
 
 ## RM
 
-![alt text](RM_Modell.drawio.png)
+![alt text](assets/RM_Modell.drawio.png)
 
 ## Doku
 
 ### Krankenhaus
 
-![Krankenhaus](image.png)
+![Krankenhaus](assets/image.png)
 
 - Drop-Down: Universell für alle Forms die man links sieht
 - Graphen für allgemeine Infos fürs Krankenhaus.
@@ -25,14 +25,14 @@ https://pir4t3141-krankenhaus-system.anvil.app
 
 ### Stationen
 
-![Stationen](image-1.png)
+![Stationen](assets/image-1.png)
 
 - Zeigt alle Stationen des Krankenhaus an
 - Personalverteilung der Stationen
 
 #### Dashboard
 
-![Dashboard](image-3.png)
+![Dashboard](assets/image-3.png)
 
 - Bettenbelegung (Wie viel freie Betten in der Station)
 - Personalverteilung in der Station 
@@ -40,7 +40,7 @@ https://pir4t3141-krankenhaus-system.anvil.app
 
 ### Patienten
 
-![Patienten](image-4.png)
+![Patienten](assets/image-4.png)
 
 - Zeigt alle Patienten die den Filtern entsprechen an
 - Filter:
@@ -53,6 +53,6 @@ https://pir4t3141-krankenhaus-system.anvil.app
 
 #### Dashboard
 
-![Dashboard](image-5.png)
+![Dashboard](assets/image-5.png)
 
 - Zeigt alle Diagnosen des Patienten an, geordnet nach Schweregrad
